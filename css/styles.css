@@ -9,9 +9,13 @@
 /* Hero Button Active #188CE8 */
 /* Header Border #ECECEC */
 /* Portfolio Card Border #EEEEEE */
+/* Portfolio Card Overlay Background rgba(33, 150, 243, 0.9); */
 /* Icons #AFB1B8 */
 /* Footer Social Links Background rgba(255, 255, 255, 0.1); */
 /* Hero Background Overlay rgba(47, 48, 58, 0.4); */
+/* Speciality Overlay rgba(47, 48, 58, 0.8); */
+/* Modal window Backdrop rgba(0, 0, 0, 0.2); */
+/* Transition Duration & Timing-function  250ms cubic-bezier(0.4, 0, 0.2, 1) */
 /* Team Card Shadow 0px 1px 3px rgba(0, 0, 0, 0.12),
                     0px 1px 1px rgba(0, 0, 0, 0.14),
                     0px 2px 1px rgba(0, 0, 0, 0.2); */
@@ -34,9 +38,12 @@
   --hero-button-active: #188ce8;
   --header-border: #ECECEC;
   --portfolio-card-border: #EEEEEE;
+  --portfolio-overlay-background: rgba(33, 150, 243, 0.9);
   --icons: #AFB1B8;
   --footer-social: rgba(255, 255, 255, 0.1);
   --hero-overlay: rgba(47, 48, 58, 0.4);
+  --speciality-overlay: rgba(47, 48, 58, 0.8);
+  --backdrop: rgba(0, 0, 0, 0.2);
   --team-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12),
     0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
@@ -46,6 +53,7 @@
   --portfolio-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12),
     0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -116,7 +124,7 @@ ul {
   height: auto;
 }
 
-/* -----------Навігація----------- */
+/* -----------Header----------- */
 
 .header {
   border-bottom: 1px solid var(--header-border);
@@ -166,15 +174,50 @@ ul {
   letter-spacing: 0.02em;
   text-decoration: none;
   color: var(--text-secondary);
+  transition: color var(--transition);
 }
 
-.logo-web,
-.current,
-.link:hover,
-.link:focus,
+.header-nav-link:hover,
+.header-nav-link:focus,
+.header-contact:hover,
+.header-contact:focus {
+  color: var(--accent);
+}
+
+.header-contact-icon {
+  margin-right: 10px;
+  fill: currentColor;
+  transition: fill var(--transition);
+}
+
 .header-contact:hover .header-contact-icon,
 .header-contact:focus .header-contact-icon {
+  fill: currentColor;
+}
+
+.logo-web {
   color: var(--accent);
+}
+
+/* .link:hover,
+.link:focus {
+  color: var(--accent);
+} */
+
+.current {
+  position: relative;
+  color: var(--accent);
+}
+
+.current::after {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  content: "";
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--accent);
 }
 
 .header-contacts {
@@ -185,11 +228,6 @@ ul {
   display: flex;
   align-items: center;
   color: inherit;
-}
-
-.header-contact-icon {
-  margin-right: 10px;
-  fill: currentColor;
 }
 
 /* -----------Hero----------- */
@@ -236,6 +274,7 @@ ul {
   color: var(--background-primary);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   cursor: pointer;
+  transition: background-color var(--transition);
 }
 
 .hero-button:hover,
@@ -276,7 +315,6 @@ ul {
 }
 
 .advantages-text {
-  font-weight: 400;
   font-size: 14px;
   line-height: calc(24 / 14);
   letter-spacing: 0.03em;
@@ -299,6 +337,26 @@ ul {
 
 .speciality-item {
   width: calc((100% - 60px) / 3);
+}
+
+.speciality-thumb {
+  position: relative;
+}
+
+.speciality-text {
+  position: absolute;
+  bottom: 0;
+  width: 370px;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: calc(16 / 14);
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background-color: var(--speciality-overlay);
+  color: var(--background-primary);
 }
 
 /* -----------Команда----------- */
@@ -366,6 +424,8 @@ ul {
   border-radius: 50%;
   background-color: var(--background-primary);
   color: var(--icons);
+  transition: background-color var(--transition),
+    color var(--transition);
 }
 
 .team-social-link:hover,
@@ -374,7 +434,11 @@ ul {
   color: var(--background-primary);
 }
 
-.team-social-icon,
+.team-social-icon {
+  fill: currentColor;
+  transition: fill var(--transition);
+}
+
 .team-social-link:hover .team-social-icon,
 .team-social-link:focus .team-social-icon {
   fill: currentColor;
@@ -407,14 +471,22 @@ ul {
   color: var(--icons);
   border: 1px solid var(--icons);
   border-radius: 4px;
+  transition: border-color var(--transition);
 }
 
 .client-link:hover,
 .client-link:focus {
+  color: var(--accent);
   border-color: var(--accent);
 }
 
 .client-icon {
+  fill: currentColor;
+  transition: color var(--transition);
+}
+
+.client-link:hover .client-icon,
+.client-link:focus .client-icon {
   fill: currentColor;
 }
 
@@ -443,6 +515,9 @@ ul {
   border: 0 solid transparent;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition);
 }
 
 .filter-button:hover,
@@ -467,11 +542,38 @@ ul {
 
 .portfolio-card-link {
   display: block;
+  transition: box-shadow var(--transition);
+}
+
+.portfolio-card-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-thumb-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 63px 24px;
+  font-size: 18px;
+  line-height: calc(28 / 18);
+  letter-spacing: 0.03em;
+  background-color: var(--portfolio-overlay-background);
+  color: var(--background-primary);
+  transform: translateY(100%);
+  transition: transform var(--transition);
 }
 
 .portfolio-card-link:focus,
 .portfolio-card-link:hover {
-  box-shadow: var(--portfolio-shadow)
+  box-shadow: var(--portfolio-shadow);
+}
+
+.portfolio-card-link:focus .portfolio-thumb-overlay,
+.portfolio-card-link:hover .portfolio-thumb-overlay {
+  transform: translateY(0);
 }
 
 .portfolio-card-footer {
@@ -526,10 +628,16 @@ ul {
   line-height: calc(21 / 14);
   letter-spacing: 0.03em;
   color: var(--text-footer-contacts);
+  transition: color var(--transition);
 }
 
 .footer-contact-item:not(:last-child) {
   margin-bottom: 9px;
+}
+
+.footer-contact:hover,
+.footer-contact:focus {
+  color: var(--accent);
 }
 
 .address {
@@ -568,6 +676,7 @@ ul {
   border-radius: 50%;
   background-color: var(--footer-social);
   color: var(--background-primary);
+  transition: background-color var(--transition);
 }
 
 .footer-social-icon {
@@ -577,4 +686,50 @@ ul {
 .footer-social-link:hover,
 .footer-social-link:focus {
   background-color: var(--accent);
+}
+
+/* -----------Модальне вікно----------- */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--backdrop);
+  transition: opacity 250ms ease;
+}
+
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 528px;
+  height: 581px;
+  background: var(--background-primary);
+  box-shadow: var(--team-shadow);
+  border-radius: 4px;
+  transition: transform 250ms ease;
+}
+
+.modal-close:active .modal {
+  transform: scale(1.2);
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 6px;
+  line-height: 0;
+  background-color: var(--background-primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
 }
